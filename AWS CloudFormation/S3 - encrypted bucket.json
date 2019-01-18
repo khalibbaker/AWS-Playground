@@ -8,7 +8,7 @@
       "Type" : "AWS::S3::Bucket",
       "Properties" : {
         "AccessControl" : "Private",
-        "BucketName" : "khalib-test-bucket",
+        "BucketName" : "*ENTER BUCKET NAME HERE*",
         "BucketEncryption" : {
           "ServerSideEncryptionConfiguration": [
             {

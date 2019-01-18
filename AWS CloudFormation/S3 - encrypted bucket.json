@@ -1,0 +1,23 @@
+"Description" : "This CloudFormation template creates a private S3 bucket with
+                AES-256 encryption. The bucket name can be changed, given the bucket
+                name is available (reference key: BucketName in Properties)."
+
+
+"Resources" : {
+    "S3Bucket" : {
+      "Type" : "AWS::S3::Bucket",
+      "Properties" : {
+        "AccessControl" : "Private",
+        "BucketName" : "khalib-test-bucket",
+        "BucketEncryption" : {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault" : {
+                "SSEAlgorithm" : "AES256"
+              }
+            }
+          ]
+        }
+      }
+    }
+}

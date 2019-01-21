@@ -1,0 +1,46 @@
+"Description" : "This CloudFormation Template creates an Amazon
+                Linux configuration. The key pair can be changed, given
+                you have access to the key pair (reference key: KeyName in Properties).
+                This EC2 has a role attached that allows admin access to S3 resource.
+
+                WARNING: A security will be automatically created with all open ports."
+
+"Resources" : {
+  "EC2Instance" : {
+    "Type" : "AWS::EC2::Instance",
+    "Properties" : {
+      "AvailabilityZone" : "us-east-1a",
+      "ImageId" : "ami-0080e4c5bc078760e",
+      "KeyName" : "awskey",
+      "InstanceType" : "t2.micro",
+      "BlockDeviceMappings": [
+        {
+          "DeviceName" : "/dev/xvda",
+          "Ebs" :
+          {
+            "VolumeSize" : "8",
+            "VolumeType" : "gp2",
+            "DeleteOnTermination" : "true"
+           }
+        }
+      ],
+      "IamInstanceProfile" : {"Ref" : "IAMInstanceRole"},
+      "NetworkInterfaces" : [
+        {
+          "AssociatePublicIpAddress" : "true",
+          "DeleteOnTermination" : "true",
+          "DeviceIndex" : "0",
+          "SubnetId" : "subnet-061da5782f4f9559e"
+        }
+      ]
+      }
+    },
+
+    "IAMInstanceRole" : {
+      "Type" : "AWS::IAM::InstanceProfile",
+      "Properties" : {
+        "Path" : "/",
+        "Roles" : ["S3-Admin-Access"]
+      }
+    }
+  }

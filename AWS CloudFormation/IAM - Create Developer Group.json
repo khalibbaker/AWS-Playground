@@ -1,0 +1,27 @@
+"Description" : "This CloudFormation template is ideal for Software Develops within
+                an organization, when using its AWS resources. The permissions include:
+
+                - Read-only access to CloudFormation
+                - Full access to S3
+                - Read-only access to EC2
+                - Read-only access to RDS
+                - Developer access to CodeBuild
+                - Power access to CodeCommit"
+
+
+"Resources" : {
+  "IAMGroup" : {
+    "Type" : "AWS::IAM::Group",
+    "Properties" : {
+      "GroupName" : "Developers",
+      "ManagedPolicyArns" : [
+        "arn:aws:iam::aws:policy/AWSCloudFormationReadOnlyAccess",
+        "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+        "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess",
+        "arn:aws:iam::aws:policy/AmazonRDSReadOnlyAccess",
+        "arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess",
+        "arn:aws:iam::aws:policy/AWSCodeCommitPowerUser"
+      ]
+    }
+  }
+}
